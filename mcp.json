@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "estate3-wiki": {
+      "type": "sse",
+      "url": "https://tower.tail12345.ts.net:3000/sse"
+    }
+  }
+}

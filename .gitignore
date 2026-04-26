@@ -1,0 +1,19 @@
+# secrets — never commit
+.env
+*.pem
+*.key
+*.crt
+
+# database — lives on Unraid, synced separately
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS
+.DS_Store

@@ -1,0 +1,23 @@
+services:
+  estate3-wiki-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: estate3-wiki-mcp
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"
+    volumes:
+      # wiki.sqlite — built on dev machine, rsync'd to Unraid appdata
+      - ${WIKI_DB_DIR:-/mnt/user/appdata/estate3-wiki}:/data:ro
+      # Tailscale TLS cert — generated on Unraid host, mounted read-only
+      - ${TLS_DIR:-/mnt/user/appdata/estate3-wiki/tls}:/tls:ro
+    environment:
+      WIKI_DB: /data/wiki.sqlite
+      PORT: 3000
+      BASE_URL: https://${TAILSCALE_HOSTNAME}
+      OAUTH_CLIENT_ID: claude-ai
+      OAUTH_CLIENT_SECRET: ${MCP_CLIENT_SECRET}
+      OAUTH_BEARER_TOKEN: ${MCP_BEARER_TOKEN}
+      TLS_CERT: /tls/cert.pem
+      TLS_KEY: /tls/key.pem
