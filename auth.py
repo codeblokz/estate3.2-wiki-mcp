@@ -88,6 +88,8 @@ class BearerAuthMiddleware(BaseHTTPMiddleware):
         "/oauth/authorize",
         "/oauth/token",
         "/health",
+        "/sse",          # Claude Code connects without Bearer token
+        "/messages/",    # SSE post-message endpoint
     }
 
     async def dispatch(self, request: Request, call_next):
